@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-function index() {
-  return <div>Home</div>;
-}
+import "./index.css";
 
-export default index;
+const Index = () => {
+  const userVideo = useRef();
+  useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        userVideo.current.srcObject = stream;
+        console.log(stream);
+      });
+  }, []);
+  return (
+    <div className="videosContainer">
+      <video className="userVideo" muted ref={userVideo} autoPlay playsInline />
+    </div>
+  );
+};
+
+export default Index;
