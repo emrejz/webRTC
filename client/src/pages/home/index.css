@@ -1,11 +1,19 @@
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
 .videosContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.userVideo {
+video {
   margin: 6px;
   width: 400px;
   height: 300px;
+  border: 2px solid black;
+  border-radius: 2px;
   /* background-color: red; */
 }
