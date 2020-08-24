@@ -13,11 +13,17 @@ const Index = () => {
   const peersRef = useRef([]);
 
   useEffect(() => {
+    socketRef.current = io.connect("https://server-web-rtc.herokuapp.com/", {
+      transports: ["websocket"],
+    });
+    navigator.getUserMedia =
+      navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia;
+
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
-        socketRef.current = io.connect("http://localhost:3001/");
-
         userVideo.current.srcObject = stream;
 
         socketRef.current.on("all users", (users) => {
@@ -45,7 +51,7 @@ const Index = () => {
               peer,
             });
 
-            setPeers((users) => [...users, peer]);
+            setPeers((peers) => [...peers, peer]);
           }
         });
 
